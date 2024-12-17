@@ -1,8 +1,5 @@
 const User = require("../models/user.model");
-const {
-  putImageUrl,
-  deleteImageUrl,
-} = require("../services/s3bucket");
+const { putImageUrl, deleteImageUrl } = require("../services/s3bucket");
 
 module.exports = {
   getUser: async (req, res) => {
@@ -64,9 +61,18 @@ module.exports = {
   uploadImage: async (req, res) => {
     const id = req.params.id;
     const file = req.file.location;
+
     if (!req.file) return res.status(400).json({ error: "no file found" });
     const user = await User.findById(id);
     if (!user) return res.statu(400).json({ error: "user not exist" });
+    const imageUrl = user.imageUrl;
+    if (imageUrl) {
+      const deletePath = await deleteImageUrl(
+        "uploads/images/users/IMG_0780.JPG"
+      );
+      const deleteFetch = await fetch(deletePath, { method: "DELETE" });
+      console.log(deleteFetch);
+    }
     const updateUser = await User.findByIdAndUpdate(
       { _id: id },
       {
