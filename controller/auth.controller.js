@@ -32,7 +32,11 @@ module.exports = {
       res.json({ uid: data._id });
     } catch (err) {
       const error = handleError(err);
-      res.status(400).json({ error: error });
+      if (error.email !== null) {
+        res.status(400).json({ error: error.email });
+      } else {
+        res.status(400).json({ error: error.password });
+      }
     }
   },
   login: async (req, res) => {
@@ -49,6 +53,7 @@ module.exports = {
       });
       res.json({ uid: data._id });
     } catch (err) {
+      console.log(err);
       res.status(400).json({ error: err.message });
     }
   },

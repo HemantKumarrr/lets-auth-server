@@ -1,9 +1,4 @@
-const {
-  S3Client,
-  GetObjectCommand,
-  PutObjectCommand,
-  DeleteObjectCommand,
-} = require("@aws-sdk/client-s3");
+const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 
 const s3Client = new S3Client({
@@ -24,31 +19,4 @@ const getImageUrl = async (key) => {
   return imageUrl;
 };
 
-const putImageUrl = async (filename, contentType) => {
-  const command = new PutObjectCommand({
-    Bucket: "hemant-private",
-    Key: `uploads/images/users/${filename}`,
-    ContentType: contentType,
-  });
-  const putImageUrl = await getSignedUrl(s3Client, command);
-  return putImageUrl;
-};
-
-const deleteImageUrl = async (key) => {
-  const command = new DeleteObjectCommand({
-    Bucket: "hemant-private",
-    Key: key,
-  });
-  const putImageUrl = await getSignedUrl(s3Client, command);
-  return putImageUrl;
-};
-
-// const initPutImageUrl = async () => {
-//   return await putImageUrl(`profile-${Date.now()}.jpeg`, "image/jpeg");
-// };
-
-// const initGetImageUrl = async (path) => {
-//   return console.log(await getImageUrl(path));
-// };
-
-module.exports = { getImageUrl, putImageUrl, deleteImageUrl };
+module.exports = { getImageUrl, s3Client };

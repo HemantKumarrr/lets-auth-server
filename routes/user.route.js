@@ -2,8 +2,8 @@ const { Router } = require("express");
 const { verifyAccessToken } = require("../middleware/jwt_init");
 const {
   getUser,
-  deleteProfileImageUrl,
   deleteUser,
+  deleteProfileImageUrl,
   updateUserProfile,
   uploadImage,
 } = require("../controller/user.controller");
@@ -16,7 +16,7 @@ route.post("/:id/upload-image", upload.single("file"), uploadImage);
 route.put("/:id/update-profile", verifyAccessToken, updateUserProfile);
 
 route.delete(
-  "/:id/delete-profile-image",
+  "/:id/delete-profile-image/:key",
   verifyAccessToken,
   deleteProfileImageUrl
 );
