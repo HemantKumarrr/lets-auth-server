@@ -27,7 +27,7 @@ module.exports = {
       res.cookie("accessToken", accessToken, {
         maxAge: 3600000,
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         secure: secure,
       });
       res.json({ uid: data._id });
@@ -49,7 +49,7 @@ module.exports = {
       res.cookie("accessToken", accessToken, {
         maxAge: 3600000,
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         secure: secure,
       });
       res.json({ uid: data._id });
@@ -63,7 +63,7 @@ module.exports = {
       res.cookie("accessToken", " ", {
         maxAge: 1000,
         httpOnly: true,
-        sameSite: "strict",
+        sameSite: "none",
         secure: secure,
       });
       res.status(200).send("User Logged Out");
