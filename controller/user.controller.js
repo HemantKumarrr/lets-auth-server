@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+require("dotenv").config();
 const {
   DeleteObjectCommand,
   HeadObjectCommand,

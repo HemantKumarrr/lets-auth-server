@@ -1,4 +1,5 @@
 const User = require("../models/user.model");
+require("dotenv").config();
 const { createAccessToken } = require("../middleware/jwt_init");
 const { NODE_ENV } = require("../constants/env");
 const secure = NODE_ENV !== "development";

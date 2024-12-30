@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { ACCESS_KEY } = require("../constants/env");
+require("dotenv").config();
 
 module.exports = {
   createAccessToken: ({ uid }) => {
